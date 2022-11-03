@@ -14,33 +14,38 @@ const App = () => {
     getProducts
   );
 
-  console.log("******", data);
-
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
 
   const handleAddToCart = (clickedItem: CartItemType) => {
-    const foundIndex = cartItems.findIndex(({ id }) => id === clickedItem.id);
+    setCartItems((prevCartItems) => {
+      const foundIndex = prevCartItems.findIndex(
+        ({ id }) => id === clickedItem.id
+      );
+      const validExistingItem = foundIndex > -1;
 
-    const validatedExistingItem = foundIndex > -1;
+      const updatedItem = validExistingItem
+        ? {
+            ...clickedItem,
+            amount: prevCartItems[foundIndex]["amount"] + 1,
+          }
+        : { ...clickedItem, amount: 1 };
 
-    const updatedItem = validatedExistingItem
-      ? {
-          ...cartItems[foundIndex],
-          amount: cartItems[foundIndex]["amount"]++,
-        }
-      : { ...clickedItem, amount: 1 };
+      const updatedArray = validExistingItem
+        ? [
+            ...prevCartItems.slice(0, foundIndex),
+            updatedItem,
+            ...prevCartItems.slice(foundIndex + 1),
+          ]
+        : [...prevCartItems, { ...updatedItem }];
 
-    const updatedArray = validatedExistingItem
-      ? [...cartItems.splice(foundIndex, 1, updatedItem)]
-      : [...cartItems, updatedItem];
-
-    setCartItems((items) => [...updatedArray]);
+      return updatedArray;
+    });
   };
 
   const handleRemoveFromCart = (id: number) => null;
   const getTotalItems = (items: CartItemType[]) => {
-    console.log("items= ", items);
+    console.log("items = ", items);
 
     return items.reduce((acum: number, item) => acum + item.amount, 0);
   };
