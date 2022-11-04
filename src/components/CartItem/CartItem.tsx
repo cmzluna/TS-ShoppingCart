@@ -1,8 +1,11 @@
 import { Button } from "@mui/material";
 import { CartItemType } from "../../types";
-import { Wrapper } from "./styles";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import { Wrapper, ButtonsWrapper } from "./styles";
+import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import TextField from "@mui/material/TextField";
+
 interface Props {
   item: CartItemType;
   addToCart: (clickedItem: CartItemType) => void;
@@ -11,32 +14,47 @@ interface Props {
 
 const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
   <Wrapper>
-    <div>
-      <h3>{item.title}</h3>
-      <div className="info">
+    <div className="description">
+      <img src={item.image} width="60" alt={item.title} />
+      <div>
+        <h4>{item.title}</h4>
         <p>Price: ${item.price}</p>
-        <p>Total: ${item.amount * item.price}</p>
       </div>
     </div>
-    <div className="buttons">
-      <Button
-        size="small"
-        disableElevation
-        variant="outlined"
-        onClick={() => removeFromCart(item.id)}
+    <ButtonsWrapper>
+      <ButtonGroup
+        variant="contained"
+        aria-label="outlined primary button group"
       >
-        <DeleteOutlinedIcon />
-      </Button>
-      <Button
-        size="small"
-        disableElevation
-        variant="outlined"
-        onClick={() => addToCart(item)}
-      >
-        <AddBoxOutlinedIcon />
-      </Button>
+        <Button
+          size="small"
+          disableElevation
+          variant="text"
+          onClick={() => removeFromCart(item.id)}
+        >
+          <RemoveCircleOutlineOutlinedIcon />
+        </Button>
+        <div className="no-border-radius">
+          <TextField
+            size="small"
+            defaultValue={item.amount}
+            fullWidth
+            id="outlined-basic"
+          />
+        </div>
+        <Button
+          size="small"
+          disableElevation
+          variant="text"
+          onClick={() => addToCart(item)}
+        >
+          <AddCircleOutlineOutlinedIcon />
+        </Button>
+      </ButtonGroup>
+    </ButtonsWrapper>
+    <div className="info">
+      <p>Total: ${item.amount * item.price}</p>
     </div>
-    <img src={item.image} width="100" alt={item.title} />
   </Wrapper>
 );
 

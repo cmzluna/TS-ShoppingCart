@@ -19,17 +19,18 @@ const App = () => {
 
   const handleAddToCart = (clickedItem: CartItemType) => {
     setCartItems((prevCartItems) => {
+      console.log("prevCartItems => ", prevCartItems);
       const foundIndex = prevCartItems.findIndex(
         ({ id }) => id === clickedItem.id
       );
       const validExistingItem = foundIndex > -1;
 
-      const updatedItem = validExistingItem
-        ? {
-            ...clickedItem,
-            amount: prevCartItems[foundIndex]["amount"] + 1,
-          }
-        : { ...clickedItem, amount: 1 };
+      console.log("validExistingItem => ", validExistingItem);
+
+      const updatedItem = {
+        ...clickedItem,
+        amount: prevCartItems[foundIndex]?.["amount"] + 1,
+      };
 
       const updatedArray = validExistingItem
         ? [
@@ -37,7 +38,7 @@ const App = () => {
             updatedItem,
             ...prevCartItems.slice(foundIndex + 1),
           ]
-        : [...prevCartItems, { ...updatedItem }];
+        : [...prevCartItems, { ...clickedItem, amount: 1 }];
 
       return updatedArray;
     });
@@ -66,7 +67,7 @@ const App = () => {
         />
       </Drawer>
       <StyledButton onClick={() => setIsCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)}>
+        <Badge badgeContent={getTotalItems(cartItems)} color="primary">
           <AddShoppingCartIcon />
         </Badge>
       </StyledButton>
