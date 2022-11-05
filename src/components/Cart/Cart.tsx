@@ -9,20 +9,26 @@ interface Props {
   removeFromCart: (id: number) => void;
 }
 const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
+  const getTotal = (items: CartItemType[]) =>
+    items.reduce((acum: number, item) => acum + item.amount * item.price, 0);
+
   return (
     <Wrapper>
-      <h2>Shopping Cart</h2>
+      <h2>Your Shopping Cart</h2>
       {!cartItems.length ? (
-        <p>no items</p>
+        <p>There are no items in your cart yet.</p>
       ) : (
-        cartItems.map((item) => (
-          <CartItem
-            key={item.id}
-            item={item}
-            addToCart={addToCart}
-            removeFromCart={removeFromCart}
-          />
-        ))
+        <div>
+          {cartItems.map((item) => (
+            <CartItem
+              key={item.id}
+              item={item}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+            />
+          ))}
+          <h1>Total amount: $ {getTotal(cartItems)} </h1>
+        </div>
       )}
     </Wrapper>
   );

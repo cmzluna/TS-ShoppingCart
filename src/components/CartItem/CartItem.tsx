@@ -22,35 +22,39 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
       </div>
     </div>
     <ButtonsWrapper>
-      <ButtonGroup
-        variant="contained"
-        aria-label="outlined primary button group"
-      >
-        <Button
+      <div>
+        <ButtonGroup
           size="small"
-          disableElevation
-          variant="text"
-          onClick={() => removeFromCart(item.id)}
+          variant="contained"
+          aria-label="outlined primary button group"
         >
-          <RemoveCircleOutlineOutlinedIcon />
-        </Button>
-        <div className="no-border-radius">
-          <TextField
+          <Button
             size="small"
-            defaultValue={item.amount}
-            fullWidth
-            id="outlined-basic"
-          />
-        </div>
-        <Button
-          size="small"
-          disableElevation
-          variant="text"
-          onClick={() => addToCart(item)}
-        >
-          <AddCircleOutlineOutlinedIcon />
-        </Button>
-      </ButtonGroup>
+            disableElevation
+            variant="text"
+            onClick={() => removeFromCart(item.id)}
+          >
+            <RemoveCircleOutlineOutlinedIcon />
+          </Button>
+          <div className="no-border-radius">
+            <TextField
+              size="small"
+              defaultValue={item.amount}
+              fullWidth
+              id="outlined-basic"
+            />
+          </div>
+          <Button
+            size="small"
+            disableElevation
+            variant="text"
+            onClick={() => addToCart(item)}
+          >
+            <AddCircleOutlineOutlinedIcon />
+          </Button>
+        </ButtonGroup>
+        <p>mensaje</p>
+      </div>
     </ButtonsWrapper>
     <div className="info">
       <p>Total: ${item.amount * item.price}</p>
