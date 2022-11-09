@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isOpen: boolean }>`
   position: relative;
   width: 20em;
   min-height: 1.5em;
-  border: 0.05em solid #777;
+  border: 0.05em solid lightblue;
+  border-radius: 10px ${({ isOpen }) => (isOpen ? "10px 0 0" : "")};
   display: flex;
   align-items: center;
   gap: 0.5em;
@@ -56,9 +57,9 @@ const OptionsList = styled.ul`
   max-height: 15em;
   left: 0;
   width: 100%;
-  top: calc(100% + 0.25em);
+  top: calc(97%);
   border: 1px solid hsl(200, 100%, 70%);
-  border-radius: 0.25em;
+  border-radius: 0 0 0.5em 0.5em;
   background-color: white;
   z-index: 100;
   opacity: 0.95;
@@ -74,11 +75,11 @@ const Option = styled.li`
   cursor: pointer;
 
   &:hover {
-    background-color: hsl(200, 100%, 50%);
+    background-color: hsl(200, 100%, 40%);
   }
 
-  &:selected {
-    background-color: hsl(200, 100%, 70%);
+  &.selected {
+    background-color: hsl(200, 100%, 60%);
   }
 `;
 
