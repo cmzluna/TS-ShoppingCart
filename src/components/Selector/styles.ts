@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   gap: 0.5em;
   padding: 0.5em;
   outline: none;
-
+  margin: 15px 0;
   &:focus {
     border-color: hsl(200, 100%, 50%);
   }
@@ -41,12 +41,45 @@ const Divider = styled.div`
   width: 0.05em;
 `;
 const Caret = styled.div`
-  border: 1em solid transparent;
+  translate: 0 25%;
+  border: 0.3em solid transparent;
   border-top-color: #777;
 `;
 
-const OptionsList = styled.ul``;
+const OptionsList = styled.ul`
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  display: none;
+  list-style: none;
+  overflow-y: auto;
+  max-height: 15em;
+  left: 0;
+  width: 100%;
+  top: calc(100% + 0.25em);
+  border: 1px solid hsl(200, 100%, 70%);
+  border-radius: 0.25em;
+  background-color: white;
+  z-index: 100;
+  opacity: 0.95;
 
-const Option = styled.li``;
+  &.show {
+    display: block;
+  }
+`;
+
+const Option = styled.li`
+  background-color: white;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: hsl(200, 100%, 50%);
+  }
+
+  &:selected {
+    background-color: hsl(200, 100%, 70%);
+  }
+`;
 
 export { Wrapper, Value, ClearBtn, Divider, Caret, OptionsList, Option };

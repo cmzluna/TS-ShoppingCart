@@ -7,11 +7,8 @@ import {
   OptionsList,
   Option,
 } from "./styles";
-
-type SelectOption = {
-  label: string;
-  value: string | number;
-};
+import { SelectOption } from "../../types";
+import { useState } from "react";
 
 type Props = {
   options: SelectOption[];
@@ -20,15 +17,23 @@ type Props = {
 };
 
 const Selector: React.FC<Props> = ({ value, onChange, options }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Wrapper tabIndex={0}>
-      <Value>Value</Value>
+    <Wrapper
+      tabIndex={0}
+      onClick={() => setIsOpen((val) => !val)}
+      onBlur={() => setIsOpen(false)}
+    >
+      <Value>{value?.label}</Value>
       <ClearBtn>&times;</ClearBtn>
       <Divider></Divider>
       <Caret></Caret>
-      <OptionsList>
+      <OptionsList className={isOpen ? "show" : ""}>
         {options.map(({ value, label }) => (
-          <Option key={value}>{label}</Option>
+          <Option onChange={(value) => undefined} key={value}>
+            {label}
+          </Option>
         ))}
       </OptionsList>
     </Wrapper>

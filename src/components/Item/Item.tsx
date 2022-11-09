@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Item: React.FC<Props> = ({ item, handleAddToCart }) => (
-  <Wrapper>
+  <Wrapper tabIndex={0}>
     <img src={item.image} alt={item.title} />
     <div>
       <h3>{item.title}</h3>

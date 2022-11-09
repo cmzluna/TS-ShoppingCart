@@ -7,3 +7,8 @@ export interface CartItemType {
   title: string;
   amount: number;
 }
+
+export interface SelectOption {
+  label: string;
+  value: string | number;
+}

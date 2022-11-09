@@ -13,7 +13,7 @@ interface Props {
 }
 
 const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
-  <Wrapper>
+  <Wrapper tabIndex={0}>
     <div className="description">
       <img src={item.image} width="60" alt={item.title} />
       <div>

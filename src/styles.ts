@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import IconButton from "@mui/material/IconButton";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 const StyledButton = styled(IconButton)`
   position: fixed;
   z-index: 100;

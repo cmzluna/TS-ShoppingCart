@@ -10,6 +10,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Selector from "./components/Selector/Selector";
 import Item from "./components/Item/Item";
 import Cart from "./components/Cart/Cart";
+import { SelectOption } from "./types";
 
 const App = () => {
   const { data, isLoading } = useQuery<CartItemType[]>("products", getProducts);
@@ -25,6 +26,10 @@ const App = () => {
     { label: "Four", value: 4 },
     { label: "Five", value: 5 },
   ];
+
+  const [selectorValue, setSelectorValue] = useState<SelectOption | undefined>(
+    options[0]
+  );
 
   const handleAddToCart = (clickedItem: CartItemType) => {
     setShowSnackBar(false);
@@ -103,8 +108,8 @@ const App = () => {
 
       <Selector
         options={options}
-        value={options[1]}
-        onChange={() => undefined}
+        value={selectorValue}
+        onChange={(el) => setSelectorValue(el)}
       />
       <Drawer
         anchor="right"

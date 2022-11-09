@@ -9,7 +9,9 @@ const Wrapper = styled.div`
   border: 1px solid lightblue;
   border-radius: 20px;
   height: 100%;
-
+  &:focus {
+    background-color: lightblue;
+  }
   button {
     border-radius: 0 0 20px 20px;
     width: 100%;
@@ -17,7 +19,8 @@ const Wrapper = styled.div`
 
   img {
     max-height: 250px;
-    object-fit: cover;
+    object-fit: contain;
+    width: 80%;
     border-radius: 20px 20px 0 0;
   }
 

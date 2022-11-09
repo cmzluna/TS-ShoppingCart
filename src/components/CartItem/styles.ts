@@ -10,6 +10,9 @@ const Wrapper = styled.div`
   padding: 10px;
   border-bottom: 1px solid lightblue;
 
+  &:focus {
+    background-color: lightblue;
+  }
   img {
     max-width: 70px;
     margin-right: 14px;
